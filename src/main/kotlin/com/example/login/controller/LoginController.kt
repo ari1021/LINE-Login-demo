@@ -55,7 +55,13 @@ class LoginController(private val lineAPIService: LineAPIService) {
         val nonce = httpSession.getAttribute(NONCE)
 //        check if the idToken is valid or not
 //        nonce is used to prevent replay attack
-        if (!lineAPIService.verifyIdToken(idToken as String, nonce as String)) return "fail"
+//        e.g.: when client gets idToken and sent it to server,
+//        server verify nonce is the same or not because a malicious client can get idToken and send it to server(replay attacks)
+        if (!lineAPIService.verifyIdToken(idToken as String, nonce as String)) {
+//            even if nonce is not matched, remove nonce
+            httpSession.removeAttribute(NONCE)
+            return "fail"
+        }
         httpSession.removeAttribute(NONCE)
         val decodedIdToken = lineAPIService.decodeIdToken(idToken)
         model.addAttribute("name", decodedIdToken.name)
