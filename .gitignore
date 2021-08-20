@@ -31,6 +31,9 @@ db/data
 # gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.jar
 
+# env
+.env
+
 # https://github.com/JetBrains/kotlin/blob/master/.gitignore
 .DS_Store
 .idea/shelf
