@@ -38,7 +38,7 @@ class LineAPIService(private val restTemplate: RestTemplate) {
     fun getToken(code: String): TokenResponse? {
         val uri = "https://api.line.me/oauth2/v2.1/token"
         val headers = HttpHeaders()
-        headers.set("Content-Type", MediaType.APPLICATION_FORM_URLENCODED.toString())
+        headers.contentType = MediaType.APPLICATION_FORM_URLENCODED
         val map = LinkedMultiValueMap<String, String>()
         map.add("grant_type", "authorization_code")
         map.add("code", code)
