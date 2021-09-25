@@ -23,11 +23,11 @@ class LoginController(private val lineAPIService: LineAPIService) {
 
     @GetMapping("/login")
     fun login(httpSession: HttpSession): String {
-        val state = Utils().getRandom() // to avoid csrf
-        val codeVerifier = Utils().getRandom() // to avoid code injection
+        val state = Utils.getRandom() // to avoid csrf
+        val codeVerifier = Utils.getRandom() // to avoid code injection
         httpSession.setAttribute(STATE, state)
         httpSession.setAttribute(CODE_VERIFIER, codeVerifier)
-        val codeChallenge = Utils().sha256WithBase64UrlEncoded(codeVerifier)
+        val codeChallenge = Utils.sha256WithBase64UrlEncoded(codeVerifier)
         val url = lineAPIService.getLineLoginUrl(state, codeChallenge, listOf("profile", "openid"))
         return "redirect:$url"
     }

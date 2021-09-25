@@ -4,7 +4,8 @@ import java.security.MessageDigest
 import java.util.*
 import kotlin.random.Random
 
-class Utils {
+object Utils {
+    private val urlEncoderWithoutPadding = Base64.getUrlEncoder().withoutPadding()
 //    how to Base64 encode
 //    1. split data into 6 bits each(if less than 6 bits, add 0 to make it 6 bits)
 //    2. convert each 6 bits into 4 characters with Base64 table
@@ -23,13 +24,14 @@ class Utils {
 
     fun getRandom(): String {
         val bytes = Random.nextBytes(32)
-        val e = Base64.getUrlEncoder().withoutPadding()
-        return e.encodeToString(bytes)
+        return urlEncodeWithoutPadding(bytes)
     }
 
     fun sha256WithBase64UrlEncoded(message: String): String {
         val messageDigest = MessageDigest.getInstance("SHA-256")
-        val e = Base64.getUrlEncoder().withoutPadding()
-        return e.encodeToString(messageDigest.digest(message.toByteArray()))
+        val digest = messageDigest.digest(message.toByteArray())
+        return urlEncodeWithoutPadding(digest)
     }
+
+    private fun urlEncodeWithoutPadding(content: ByteArray): String = urlEncoderWithoutPadding.encodeToString(content)
 }
