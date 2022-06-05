@@ -16,7 +16,7 @@ This application gets Token from LINE Platform and just displays username and pr
 `state` is used to prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery). We should verify
 that the `state` sent to the user is the same as the `state` received from the LINE Platform.
 
-see: https://github.com/ari1021/LINE-Login-demo/blob/main/src/main/kotlin/com/example/login/controller/LoginController.kt#L44
+see: https://github.com/arkuchy/LINE-Login-demo/blob/main/src/main/kotlin/com/example/login/controller/LoginController.kt#L44
 
 ## nonce
 
@@ -38,7 +38,7 @@ the following:
 
 then authorization server(not ourselves) verify `code_verifier`.
 
-see: https://github.com/ari1021/LINE-Login-demo/blob/main/src/main/kotlin/com/example/login/controller/LoginController.kt#L48
+see: https://github.com/arkuchy/LINE-Login-demo/blob/main/src/main/kotlin/com/example/login/controller/LoginController.kt#L48
 
 ## reference
 
